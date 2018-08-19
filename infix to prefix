@@ -1,0 +1,41 @@
+/*package whatever //do not write package name here */
+
+import java.io.*;
+import java.util.*;
+
+class GFG {
+	public static void main (String[] args) {
+		System.out.println("enter an expression");
+		Scanner sn=new Scanner(System.in);
+		String s="*-A/BC-/AKL";
+		String t=infpre(s);
+		System.out.println(t);
+	}
+	public static boolean isOperator(char ch){
+	    switch(ch){
+	        case '+':
+	        case '-':
+	        case '*':
+	        case '/':
+	       case '^':return true;
+	       
+	    }return false;
+	}
+	public static String infpre(String s){
+	    Stack<String> a=new Stack<>();
+	    String ret="";
+	    for (int i=s.length()-1;i>=0;i-- ){
+	        char ch=s.charAt(i);
+	        if(Character.isLetterOrDigit(ch)){
+	            a.push(String.valueOf(ch));
+	           
+	        }else if(isOperator(ch)){
+	            String b=a.pop();
+	            String c=a.pop();
+	            String temp="("+b+ch+c+")";
+	            a.push(temp);
+	        }
+	    }
+	    return a.peek();
+	}
+}
